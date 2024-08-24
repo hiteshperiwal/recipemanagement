@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-lz)3(jxvmppv$#zptq3kbg7v+w%pf^&u3g0_-)@x^-5spcbqiw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['recipemanagement.vercel.app']
+ALLOWED_HOSTS = ['vercel.app','.now.sh']
 
 EXTERNAL_APP=['vege']
 # Application definition
@@ -119,10 +119,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build',"static")
 
 STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'public/static'),
+        os.path.join(BASE_DIR, 'static'),
     ]
 
 # Media files (user uploaded content)
