@@ -26,7 +26,18 @@ SECRET_KEY = 'django-insecure-lz)3(jxvmppv$#zptq3kbg7v+w%pf^&u3g0_-)@x^-5spcbqiw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['vercel.app','.now.sh']
+ALLOWED_HOSTS = ['.vercel.app','now.sh','127.0.0.1','localhost']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'hfxCTNChatbfydEJcNwReZZAkRVEiqGH',
+        'HOST': 'postgres.railway.internal',
+        'PORT': '5432',
+    }
+}
 
 EXTERNAL_APP=['vege']
 # Application definition
@@ -76,12 +87,12 @@ WSGI_APPLICATION = 'recipemanagement.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -118,8 +129,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build',"static")
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, '\static'),
