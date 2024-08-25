@@ -65,7 +65,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','django-insecure-lz)3(jxvmppv$#z
 # DEBUG = False
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['.vercel.app','now.sh','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['.vercel.app','now.sh','127.0.0.1','localhost','hpython.pythonanywhere.com']
 
 # if DATABASE_URL:
 #     DATABASES = {
@@ -190,7 +190,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 
-
+CSRF_TRUSTED_ORIGINS = ['https://hpython.pythonanywhere.com']
 
 # Media files (user uploaded content)
 MEDIA_URL = '/media/'
