@@ -187,8 +187,23 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+if os.environ.get('DJANGO_ENV') == 'production':
+    STATICFILES_DIRS = [
+        '/path/to/production/static',
+    ]
+else:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',  # Ensure this directory exists
+    ]
+
+
+
+
+
+
+
 
 CSRF_TRUSTED_ORIGINS = ['https://hpython.pythonanywhere.com']
 
