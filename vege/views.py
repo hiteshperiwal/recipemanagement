@@ -13,6 +13,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes,force_str
 from django.contrib.sites.shortcuts import get_current_site
+from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import SetPasswordForm
@@ -69,6 +70,12 @@ def update_receipe(request,id):
     # return HttpResponse("a")
     
     return render(request,'update_receipe.html',context)
+
+@login_required(login_url="/login/")
+def see_receipe(request,id):
+    queryset=get_object_or_404(Receipe, id=id)
+    context={'receipes':queryset}
+    return render(request,'seerecipe.html',context)
 
 def login_page(request):
     if request.method == "POST":

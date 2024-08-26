@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block start %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <a href="{% url 'receipe' %}" class="btn btn-danger mb-3">Back</a>
+            <div class="card bg-light shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="card-title">{{ receipes.receipe_name }}</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Description</h5>
+                    <p class="card-text">{{ receipes.receipe_description }}</p>
+
+                    <div class="text-center mt-4">
+                        <h5 class="card-title">Image</h5>
+                        <img src="/media/{{ receipes.receipe_image }}" class="img-fluid" style="max-height: 250px; object-fit: cover;" alt="{{ receipes.receipe_name }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
+{% endblock %}

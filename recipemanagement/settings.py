@@ -27,9 +27,6 @@ load_dotenv(env_path)
 # Attempt to fetch DATABASE_URL from environment variables
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
-
-
-
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.config(
@@ -37,22 +34,22 @@ if 'DATABASE_URL' in os.environ:
             conn_health_checks=True,
         )
     }
-# else:
-#     # If no DATABASE_URL is set, fall back to manual configuration
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': 'railway',  # Replace with your actual database name
-#             'USER': 'postgres',  # Replace with your actual username
-#             'PASSWORD': 'hfxCTNChatbfydEJcNwReZZAkRVEiqGH',    # Replace with your actual password
-#             'HOST': 'postgres.railway.internal',  # Replace with your actual host
-#             'PORT': '5432',
-#         }
-#     }
+else:
+    # If no DATABASE_URL is set, fall back to manual configuration
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
+        }
+    }
 
 # # Optionally, raise an error if the database configuration is still not set up
-# if not DATABASES['default'].get('ENGINE'):
-#     raise ImproperlyConfigured("No valid database configuration found. Ensure DATABASE_URL is set or manual settings are correct.")
+if not DATABASES['default'].get('ENGINE'):
+    raise ImproperlyConfigured("No valid database configuration found. Ensure DATABASE_URL is set or manual settings are correct.")
 
 
 
@@ -63,39 +60,13 @@ if 'DATABASE_URL' in os.environ:
 
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-lz)3(jxvmppv$#zptq3kbg7v+w%pf^&u3g0_-)@x^-5spcbqiw'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','django-insecure-lz)3(jxvmppv$#zptq3kbg7v+w%pf^&u3g0_-)@x^-5spcbqiw')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = 'False'
 
 ALLOWED_HOSTS = ['.vercel.app','now.sh','127.0.0.1','localhost','hpython.pythonanywhere.com']
 
-# if DATABASE_URL:
-#     DATABASES = {
-#         'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': 'railway',
-#             'USER': 'postgres',
-#             'PASSWORD': 'hfxCTNChatbfydEJcNwReZZAkRVEiqGH',
-#             'HOST': '',
-#             'PORT': '5432',
-#         }
-#     }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DB_NAME', 'railway'),
-#         'USER': os.getenv('DB_USER', 'postgres'),
-#         'PASSWORD': os.getenv('DB_PASSWORD', 'hfxCTNChatbfydEJcNwReZZAkRVEiqGH'),
-#         'HOST': os.getenv('DB_HOST', 'postgres.railway.internal'),
-#         'PORT': os.getenv('DB_PORT', '5432'),
-#     }
-# }
+
 
 EXTERNAL_APP=['vege']
 # Application definition
@@ -147,12 +118,12 @@ WSGI_APPLICATION = 'recipemanagement.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -223,9 +194,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_USE_TLS=True
-EMAIL_PORT=587
-EMAIL_HOST_USER="mailhp1.0@gmail.com"
-EMAIL_HOST_PASSWORD="qceo jdvs xutf gyjs"
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 if not DATABASES['default'].get('ENGINE'):
     raise ImproperlyConfigured("No valid database configuration found. Ensure DATABASE_URL is set or manual settings are correct.")
