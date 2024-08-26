@@ -48,8 +48,7 @@ DATABASES = {
     }
 
 # # Optionally, raise an error if the database configuration is still not set up
-if not DATABASES['default'].get('ENGINE'):
-    raise ImproperlyConfigured("No valid database configuration found. Ensure DATABASE_URL is set or manual settings are correct.")
+
 
 
 

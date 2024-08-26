@@ -1,2 +1,4 @@
 staticfiles\admin
 .env
+static
+staticfiles_build
