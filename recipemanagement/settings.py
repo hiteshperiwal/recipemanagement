@@ -25,18 +25,18 @@ env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
 load_dotenv(env_path)
 
 # Attempt to fetch DATABASE_URL from environment variables
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# DATABASE_URL = os.environ.get('DATABASE_URL')
 
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.config(
-            conn_max_age=500,
-            conn_health_checks=True,
-        )
-    }
-else:
+# if 'DATABASE_URL' in os.environ:
+#     DATABASES = {
+#         'default': dj_database_url.config(
+#             conn_max_age=500,
+#             conn_health_checks=True,
+#         )
+#     }
+# else:
     # If no DATABASE_URL is set, fall back to manual configuration
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.getenv('DB_NAME'),
@@ -170,7 +170,7 @@ if os.environ.get('DJANGO_ENV') == 'production':
     ]
 else:
     STATICFILES_DIRS = [
-        BASE_DIR / 'static',  # Ensure this directory exists
+        BASE_DIR / 'staticfiles_build' / 'static',  # Ensure this directory exists
     ]
 
 
